@@ -8,9 +8,9 @@ export class MoviesService {
 
   constructor(public http: HttpClient) { }
 
-  getCartelera(){
+  getPeliculas(id){
     return this.http.get
-    ('https://api.themoviedb.org/3/discover/movie?api_key=32fb04e1f80ed26c84daa2ce597fd121&language=es&sort_by=release_date.asc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2020-04-01&primary_release_date.lte=2020-04-03');
+    ('https://api.themoviedb.org/3/discover/movie?api_key=32fb04e1f80ed26c84daa2ce597fd121&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres='+id);
   }
 
 }

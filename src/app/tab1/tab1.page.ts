@@ -9,7 +9,33 @@ import { RespuestaMDB, Pelicula } from '../interfaces/interfaces';
 })
 export class Tab1Page implements OnInit {
 
-  peliculas: Pelicula[] = [];
+  peliculas_genrer = [
+      {
+        "id": 28,
+        "name": "Action",
+        "peliculas": []
+      },
+      {
+        "id": 35,
+        "name": "Comedy",
+        "peliculas": []
+      },
+      {
+        "id": 18,
+        "name": "Drama",
+        "peliculas": []
+      },
+      {
+        "id": 10749,
+        "name": "Romance",
+        "peliculas": []
+      },
+      {
+        "id": 53,
+        "name": "Thriller",
+        "peliculas": []
+      }
+    ]
 
   slidesOpt = {
     slidesPerView: 1.1,
@@ -19,10 +45,15 @@ export class Tab1Page implements OnInit {
   constructor(public movieService: MoviesService) {}
 
   ngOnInit(): void {
-    this.movieService.getCartelera().subscribe((resp: RespuestaMDB)=>{
-      console.log(resp.results);
-      this.peliculas = resp.results;
-    });
+    this.cargarPeliculas();
   }
 
+  cargarPeliculas(){  
+    this.peliculas_genrer.forEach(element => {
+      this.movieService.getPeliculas(element.id).subscribe((resp: RespuestaMDB)=> {
+        element.peliculas = resp.results;
+      })
+    });
+    console.log(this.peliculas_genrer)
+  } 
 }
